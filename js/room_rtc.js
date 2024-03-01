@@ -58,6 +58,7 @@ let joinRoomInit = async () => {
     channel.on('ChannelMessage', handleChannelMessage)
 
     getMembers();
+    addBotMessageToDom(`Welcome to the room, ${displayName}! 🙏`)
 
     // Initialize the AgoraRTC client.
     client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
@@ -67,11 +68,11 @@ let joinRoomInit = async () => {
     client.on('user-published', handleUserPublished);
     // triggers this event when a remote user becomes offline.
     client.on('user-left', handleUserLeft);
-
-    joinStream();
 }
 
 let joinStream = async () => {
+    document.getElementById('join-btn').style.display = 'none';
+    document.getElementsByClassName('stream__actions')[0].style.display = 'flex';
     // https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/cameravideotrackinitconfig.html
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks({}, {
         encoderConfig: {
@@ -146,7 +147,10 @@ let handleUserPublished = async (user, mediaType) => {
 
 let handleUserLeft = async (user) => {
     delete remoteUsers[user.uid];
-    document.getElementById(`user-container-${user.uid}`).remove();
+    let item = document.getElementById(`user-container-${user.uid}`);
+    if (item) {
+        item.remove();
+    }
 
     // If the user who left was in the large display frame
     if (userIdInDisplayFrame === `user-container-${user.uid}`) {
@@ -244,10 +248,44 @@ let toggleScreenSharing = async (e) => {
     }
 }
 
+let leaveStream = async (e) => {
+    e.preventDefault();
+
+    document.getElementById('join-btn').style.display = 'block';
+    document.getElementsByClassName('stream__actions')[0].style.display = 'none';
+
+    for (let track of localTracks) {
+        track.stop();
+        track.close();
+    }
+    await client.unpublish([localTracks[0], localTracks[1]]);
+
+    // if user is sharing screen, then unpublish the localScreenTracks
+    if (localScreenTracks) {
+        await client.unpublish([localScreenTracks]);
+    }
+    document.getElementById(`user-container-${uid}`).remove();
+
+    if (userIdInDisplayFrame === `user-container-${uid}`) {
+        displayFrame.style.display = null;
+
+        let videoFrames = document.getElementsByClassName('video__container');
+        for (let i = 0; videoFrames.length > i; i++) {
+            if (videoFrames[i].id !== userIdInDisplayFrame) {
+                videoFrames[i].style.height = "100px";
+                videoFrames[i].style.width = "100px";
+            }
+        }
+    }
+
+    channel.sendMessage({ text: JSON.stringify({ 'type': 'user_left', 'uid': uid }) })
+}
+
 // Button event listeners for toggling camera and microphone
 document.getElementById('camera-btn').addEventListener('click', toggleCamera);
 document.getElementById('mic-btn').addEventListener('click', toggleMic);
 document.getElementById('screen-btn').addEventListener('click', toggleScreenSharing);
-
+document.getElementById('join-btn').addEventListener('click', joinStream);
+document.getElementById('leave-btn').addEventListener('click', leaveStream);
 // Start the application
 joinRoomInit();
