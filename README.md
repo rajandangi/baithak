@@ -12,3 +12,7 @@ Baiṭhak, meaning 'gathering' in Nepali, is a video calling app that connects p
 - **Secure:** Your conversations are always protected with top-notch security.
 
 Experience the blend of tradition and technology with Baithak, where every call is a gathering in the heart of Nepal's digital abode.
+
+### Resources
+1. [How does WebRTC work?]('https://medium.com/agora-io/how-does-webrtc-work-996748603141) - article
+2. [Agora Video SDK for Web v4.20.1]("https://api-ref.agora.io/en/video-sdk/web/4.x/index.html")
