@@ -12,8 +12,8 @@
 }
 
 #members__container {
-  background-color: #262625;
-  border-right: 1px solid #797a79;
+  background-color: rgb(2, 33, 56);
+  border-right: 1px solid rgba(51, 74, 93, 0.9);
   overflow-y: auto;
   width: 90%;
   max-width: 250px;
@@ -23,7 +23,7 @@
 }
 
 #members__count {
-  background-color: #1d1d1c;
+  background-color: #9B1C31;
   padding: 7px 15px;
   font-size: 14px;
   font-weight: 600;
@@ -37,7 +37,7 @@
   padding: 0 1rem;
   position: fixed;
   font-size: 18px;
-  background-color: #323143;
+  background-color: rgb(3, 27, 46);
   width: 218px;
 }
 
@@ -65,7 +65,7 @@
   height: 8px;
   width: 8px;
   border-radius: 50%;
-  background-color: #2aca3e;
+  background-color: #009C77;
 }
 
 .member_name {
@@ -75,13 +75,13 @@
 
 #messages__container {
   height: calc(100vh - 85px);
-  background-color: #262625;
+  background-color: rgb(2, 33, 56);
   right: 0;
   position: absolute;
   width: 100%;
   max-width: 25rem;
   overflow-y: auto;
-  border-left: 1px solid #111;
+  border-left: 1px solid rgb(3, 27, 46);
 }
 
 #messages {
@@ -101,7 +101,7 @@
 }
 
 .message__body {
-  background-color: #363739;
+  background-color: rgb(3, 27, 46);
   border-radius: 10px;
   padding: 10px 15px;
   width: fit-content;
@@ -128,7 +128,7 @@
 
 .message__author__bot {
   margin-right: 10px;
-  color: #a52aca !important;
+  color: rgb(0, 156, 119) !important;
 
 }
 
@@ -141,7 +141,7 @@
   position: fixed;
   bottom: 0;
   display: block;
-  background-color: #1a1a1a;
+  background-color: rgb(3, 27, 46);
   padding: 1em;
 }
 
@@ -153,7 +153,7 @@
   padding: 18px;
   font-size: 14px;
   box-sizing: border-box;
-  background-color: #3f434a;
+  background-color: rgb(49, 74, 93);
 }
 
 #message__form input:focus {
@@ -161,7 +161,7 @@
 }
 
 #message__form input::placeholder {
-  color: #707575;
+  color: #DECCBE;
 }
 
 #stream__container {
@@ -191,7 +191,7 @@
 }
 
 #stream__box .video__container {
-  border: 2px solid #000;
+  border: 2px solid rgb(3, 27, 46);
   border-radius: 0;
   height: 100% !important;
   width: 100% !important;
@@ -208,7 +208,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #b366f9;
+  border: 2px solid rgb(0, 156, 119);
   border-radius: 50%;
   cursor: pointer;
   overflow: hidden;
@@ -304,7 +304,7 @@
   position: fixed;
   bottom: 1rem;
   border-radius: 8px;
-  background-color: #1a1a1a60;
+  background-color: rgb(3, 27, 46);
   padding: 1rem;
   left: 50%;
   display: none;
@@ -337,7 +337,7 @@
 .stream__actions button.active,
 .stream__actions a:hover,
 .stream__actions button:hover {
-  background-color: #845695;
+  background-color: rgb(0, 156, 119);
 }
 
 #join-btn {

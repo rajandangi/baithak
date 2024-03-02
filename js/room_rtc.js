@@ -182,18 +182,25 @@ let toggleMic = async (e) => {
 
 let toggleCamera = async (e) => {
     let button = e.currentTarget
+    let videoElement = document.getElementById(`user-${uid}`);
 
     // Turn on the camera
     if (localTracks[1].muted) {
         await localTracks[1].setMuted(false);
         button.classList.add('active');
+        if (videoElement.firstChild) {
+            videoElement.style.display = 'block';
+        }
     } else {
         // Turn off the camera
         await localTracks[1].setMuted(true);
         button.classList.remove('active');
+        // Remove the video player from local user's video frame
+        if (videoElement.firstChild) {
+            videoElement.style.display = 'none';
+        }
     }
 }
-
 
 let toggleScreenSharing = async (e) => {
     let screenButton = e.currentTarget;
